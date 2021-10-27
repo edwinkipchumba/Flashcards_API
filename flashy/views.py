@@ -34,7 +34,7 @@ class Users(APIView): # list all users
     """
     List all users.
     """
-    # permission_classes = (IsAdminOrReadOnly,)
+    
 
     def get(self, request, format=None):
         users = User.objects.all()
@@ -81,7 +81,6 @@ class logoutUser(APIView): # logout user
 
 
 class Subject(APIView):  # get all Subjects
-    # permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):  # get all Subjects
         all_Subjects = Subject.objects.all()
@@ -97,7 +96,6 @@ class Subject(APIView):  # get all Subjects
 
 
 class SubjectDetail(APIView):  # get, update, delete single Subject
-    # permission_classes = (IsAdminOrReadOnly,)
 
     def get_object(self, pk):
         try:
@@ -125,7 +123,7 @@ class SubjectDetail(APIView):  # get, update, delete single Subject
 
 
 class Notes(APIView):  # get all notes
-    # permission_classes = (IsAdminOrReadOnly,)
+   
 
     def get(self, request, format=None):  # get all notes
         all_notes = Notes.objects.all()
@@ -170,7 +168,6 @@ class NotesDetail(APIView):  # get, update, delete single note
 
 # ProfileList
 class Profile(APIView):
-    # permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):
         all_profiles = Profile.objects.all()
@@ -187,7 +184,6 @@ class Profile(APIView):
 
 # ProfileDetail
 class ProfileDetail(APIView):
-    # permission_classes = (IsAdminOrReadOnly,)
 
     def get_object(self, pk):
         try:
