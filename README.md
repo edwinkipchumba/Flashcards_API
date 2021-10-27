@@ -6,5 +6,5 @@ http://127.0.0.1:8000/api/users/create/
 http://127.0.0.1:8000/api/subjects/
 http://127.0.0.1:8000/api/notes/
  
-## Note:WORK ON THE Notes endpoints
+
 

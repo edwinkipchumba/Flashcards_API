@@ -17,6 +17,10 @@ from rest_framework.views import APIView
 from .serializer import SubjectSerializer, NotesSerializer, ProfileSerializer, UserSerializer,UserCreateSerializer
 from .permissions import IsAdminOrReadOnly
 
+#swagger
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 
 # Create your views here.
 
@@ -73,6 +77,7 @@ class logoutUser(APIView): # logout user
     def get(self, request, format=None):
         logout(request)
         return Response(status=status.HTTP_200_OK)
+    print ("You have successfully logged out!")
 
 
 class Subject(APIView):  # get all Subjects
