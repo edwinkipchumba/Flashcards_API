@@ -8,7 +8,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     # api
-    url(r'^api/subjects/$', views.Subject.as_view()), # list of subjects
+    # url(r'^api/subjects/$', views.Subject.as_view()), # list of subjects
+    url(r'^api/subjects/$', views.SubjectList.as_view()), # list of subjects
     url(r'^api/subjects/(?P<pk>[0-9]+)/$', views.SubjectDetail.as_view()), # single subject
     url(r'^api/notes/$', views.Notes.as_view()), # list of notes
     url(r'^api/notes/(?P<pk>[0-9]+)/$', views.NotesDetail.as_view()), # single note

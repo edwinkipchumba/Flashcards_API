@@ -27,7 +27,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = ("id","name", "image", "created_at")
+        fields = ("id","name")
 
 
 # Notes serializer

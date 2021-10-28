@@ -3,6 +3,7 @@ from django.shortcuts import render
 from flashy.permissions import IsAdminOrReadOnly
 from .models import Profile, Subject, Notes
 from django.contrib.auth.models import User
+# from django.core.exceptions import ObjectDoesNotExist
 
 # authentication
 from django.contrib.auth import authenticate, login, logout
@@ -14,10 +15,10 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import SubjectSerializer, NotesSerializer, ProfileSerializer, UserSerializer,UserCreateSerializer
+from .serializer import SubjectSerializer, NotesSerializer, ProfileSerializer, UserSerializer, UserCreateSerializer
 from .permissions import IsAdminOrReadOnly
 
-#swagger
+# swagger
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -30,18 +31,18 @@ def index(request):
 
 # rest api ====================================
 
-class Users(APIView): # list all users
+class Users(APIView):  # list all users
     """
     List all users.
     """
-    
 
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
-class UserCreate(APIView): # create user
+
+class UserCreate(APIView):  # create user
     """
     Create a user.
     """
@@ -53,7 +54,7 @@ class UserCreate(APIView): # create user
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
 
 # login user ====================================
 class loginUser(APIView):
@@ -73,14 +74,15 @@ class loginUser(APIView):
 
 
 # logout user ====================================
-class logoutUser(APIView): # logout user
+class logoutUser(APIView):  # logout user
     def get(self, request, format=None):
         logout(request)
         return Response(status=status.HTTP_200_OK)
-    print ("You have successfully logged out!")
+    print("You have successfully logged out!")
 
 
-class Subject(APIView):  # get all Subjects
+class SubjectList(APIView):  # get all Subjects
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):  # get all Subjects
         all_Subjects = Subject.objects.all()
@@ -96,6 +98,7 @@ class Subject(APIView):  # get all Subjects
 
 
 class SubjectDetail(APIView):  # get, update, delete single Subject
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get_object(self, pk):
         try:
@@ -123,7 +126,7 @@ class SubjectDetail(APIView):  # get, update, delete single Subject
 
 
 class Notes(APIView):  # get all notes
-   
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):  # get all notes
         all_notes = Notes.objects.all()
@@ -139,13 +142,13 @@ class Notes(APIView):  # get all notes
 
 
 class NotesDetail(APIView):  # get, update, delete single note
-    
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get_object(self, pk):
-        try:
-          return Notes.objects.get(pk=pk)
-        except Notes.DoesNotExist:
-            raise Http404
+        # try:
+        return Notes.objects.get(pk=pk)
+        # except Notes.DoesNotExist:
+        #     raise Http404
 
     def get(self, request, pk, format=None):  # get note
         notes = self.get_object(pk)
@@ -165,8 +168,9 @@ class NotesDetail(APIView):  # get, update, delete single note
         notes.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 # ProfileList
+
+
 class Profile(APIView):
 
     def get(self, request, format=None):
