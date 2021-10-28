@@ -11,7 +11,7 @@ urlpatterns = [
     # url(r'^api/subjects/$', views.Subject.as_view()), # list of subjects
     url(r'^api/subjects/$', views.SubjectList.as_view()), # list of subjects
     url(r'^api/subjects/(?P<pk>[0-9]+)/$', views.SubjectDetail.as_view()), # single subject
-    url(r'^api/notes/$', views.Notes.as_view()), # list of notes
+    url(r'^api/notes/$', views.NotesList.as_view()), # list of notes
     url(r'^api/notes/(?P<pk>[0-9]+)/$', views.NotesDetail.as_view()), # single note
     url(r'^api/profiles/$', views.Profile.as_view()), # list of profiles
     url(r'^api/profiles/(?P<pk>[0-9]+)/$', views.ProfileDetail.as_view()), # single profile

@@ -125,7 +125,7 @@ class SubjectDetail(APIView):  # get, update, delete single Subject
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class Notes(APIView):  # get all notes
+class NotesList(APIView):  # get all notes
     permission_classes = (IsAdminOrReadOnly,)
 
     def get(self, request, format=None):  # get all notes
@@ -145,10 +145,10 @@ class NotesDetail(APIView):  # get, update, delete single note
     permission_classes = (IsAdminOrReadOnly,)
 
     def get_object(self, pk):
-        # try:
-        return Notes.objects.get(pk=pk)
-        # except Notes.DoesNotExist:
-        #     raise Http404
+        try:
+            return Notes.objects.get(pk=pk)
+        except Notes.DoesNotExist:
+            raise Http404
 
     def get(self, request, pk, format=None):  # get note
         notes = self.get_object(pk)
