@@ -78,7 +78,7 @@ class logoutUser(APIView):  # logout user
     def get(self, request, format=None):
         logout(request)
         return Response(status=status.HTTP_200_OK)
-    print("You have successfully logged out!")
+    # print("You have successfully logged out!")
 
 
 class SubjectList(APIView):  # get all Subjects
